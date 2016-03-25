@@ -25,9 +25,18 @@ class CarouselBlock(XBlock):
        scope=Scope.content,
        default=textwrap.dedent("""
             <carousel>
-              <img>http://met-content.bu.edu/etr2/content/images/Slide1.JPG</img>
-              <img>http://met-content.bu.edu/etr2/content/images/Slide2.JPG</img>
-              <img>http://met-content.bu.edu/etr2/content/images/Slide3.JPG</img>
+              <img>
+                <link>http://met-content.bu.edu/etr2/content/images/Slide1.JPG</link>
+                <description>Slide 1 description comes here</description>
+              </img>
+              <img>
+                <link>http://met-content.bu.edu/etr2/content/images/Slide2.JPG</link>
+                <description>Slide 2 description comes here</description>
+              </img>
+              <img>
+                <link>http://met-content.bu.edu/etr2/content/images/Slide3.JPG</link>
+                <description>Slide 3 description comes here</description>
+              </img>
               <video>http://www.youtube.com/watch?v=7uHeNryKUWk</video>
               <doc>http://www.bu.edu/met-eti/files/2013/03/Final_VirtualLaboratoriesForLearning.pdf</doc>
             </carousel>
