@@ -12,18 +12,33 @@ A demo for the above xblock can be found [here](http://met-testedx2.bu.edu:8000/
 * **user**: user@test.com
 * **password**: user
 
-Examples
+Examples(Updated)
 --------
 ### Images, Videos and Documents
 ```xml
 <carousel>
-  <img src="http://met-content.bu.edu/etr2/content/images/Slide1.JPG" />
-  <img src="http://met-content.bu.edu/etr2/content/images/Slide2.JPG" />
-  <img src="http://met-content.bu.edu/etr2/content/images/Slide3.JPG" />
-  <video src="http://www.youtube.com/watch?v=7uHeNryKUWk" />
-  <doc src="http://www.bu.edu/met-eti/files/2013/03/Final_VirtualLaboratoriesForLearning.pdf" />
+  <img>
+    <link>http://met-content.bu.edu/etr2/content/images/Slide1.JPG</link>
+    <description>Slide 1 description comes here</description>
+  </img>
+  <img>
+    <link>http://met-content.bu.edu/etr2/content/images/Slide2.JPG</link>
+    <description>Slide 2 description comes here</description>
+  </img>
+  <img>
+    <link>http://met-content.bu.edu/etr2/content/images/Slide3.JPG</link>
+    <description>Slide 3 description comes here</description>
+  </img>
+  <video>http://www.youtube.com/watch?v=7uHeNryKUWk</video>
+  <doc>http://www.bu.edu/met-eti/files/2013/03/Final_VirtualLaboratoriesForLearning.pdf</doc>
 </carousel>
 ```
+
+UPDATE:
+------
+
+* Added Image description for each slide
+* To use this new feature use above xml format
 
 TO-DO: 
 ------
