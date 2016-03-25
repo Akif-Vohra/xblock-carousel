@@ -17,7 +17,7 @@ class CarouselBlock(XBlock):
     """
 
     display_name = String(help="This name appears in horizontal navigation at the top of the page.", 
-        default="Carousel", 
+        default="LYNX Slider XBlock",
         scope=Scope.content
     )
     
