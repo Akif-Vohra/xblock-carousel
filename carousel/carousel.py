@@ -39,13 +39,17 @@ class CarouselBlock(XBlock):
         Lab view, displayed to the student
         """
 
-	root = ET.fromstring(self.data)
+        root = ET.fromstring(self.data)
         items = []
         for child in root:
+            description = ''
             if child.tag == 'doc': child.text = urllib.quote(child.text, '')
+            if child.tag == 'img':
+                child.text = child.find('link').text
+                description = child.find('description').text
             width = child.attrib.get('width', '100%')
             height = child.attrib.get('height', '625')
-            items.append((child.tag, child.text, width, height))
+            items.append((child.tag, child.text, width, height, description))
 
         fragment = Fragment()
 

@@ -4,6 +4,8 @@
         {% if child.0 == "img" %}
             <div>
                 <img src="{{ child.1 }}"  width="{{ child.2 }}" height="{{ child.3 }}">
+                </br>
+                <p> {{child.4}}</p>
             </div>
         {% endif %}
         {% if child.0 == "video" %}
