@@ -1,6 +1,6 @@
 import textwrap
 import urllib
-from lxml import etree
+from lxml import etree, html
 from xml.etree import ElementTree as ET
 
 from xblock.core import XBlock
@@ -11,20 +11,21 @@ from .utils import load_resource, render_template
 
 from StringIO import StringIO
 
+
 class CarouselBlock(XBlock):
     """
     An XBlock providing a responsive images carousel
     """
 
-    display_name = String(help="This name appears in horizontal navigation at the top of the page.", 
-        default="LYNX Slider XBlock",
+    display_name = String(help="This name appears in horizontal navigation at the top of the page.",
+        default="Lynx Slider Block",
         scope=Scope.content
     )
-    
-    data = String(help="",  
+
+    data = String(help="",
        scope=Scope.content,
        default=textwrap.dedent("""
-            <carousel>
+             <carousel>
               <img>
                 <link>http://met-content.bu.edu/etr2/content/images/Slide1.JPG</link>
                 <description>Slide 1 description comes here</description>
@@ -37,8 +38,14 @@ class CarouselBlock(XBlock):
                 <link>http://met-content.bu.edu/etr2/content/images/Slide3.JPG</link>
                 <description>Slide 3 description comes here</description>
               </img>
-              <video>http://www.youtube.com/watch?v=7uHeNryKUWk</video>
-              <doc>http://www.bu.edu/met-eti/files/2013/03/Final_VirtualLaboratoriesForLearning.pdf</doc>
+              <video>
+                <link>http://www.youtube.com/watch?v=7uHeNryKUWk</link>
+                <description>Video Description goes here</description>
+              </video>
+              <doc>
+                <link>http://www.bu.edu/met-eti/files/2013/03/Final_VirtualLaboratoriesForLearning.pdf</link>
+                <description>Document Description goes here</description>
+              </doc>
             </carousel>
           """
     ))
@@ -47,18 +54,18 @@ class CarouselBlock(XBlock):
         """
         Lab view, displayed to the student
         """
-
-        root = ET.fromstring(self.data)
+        #root = ET.fromstring(self.data)
+        #root = etree.parse(StringIO(self.data.replace('&', '&amp;'))).getroot()
+        root = etree.fromstring(self.data.replace('&', '&amp;'))
         items = []
         for child in root:
-            description = ''
-            if child.tag == 'doc': child.text = urllib.quote(child.text, '')
-            if child.tag == 'img':
-                child.text = child.find('link').text
-                description = child.find('description').text
+            text_data = child.find('link').text
+            if child.tag == 'doc': text_data = urllib.quote(text_data, '')
+            description = child.find('description')
+            description = ET.tostring(description)
             width = child.attrib.get('width', '100%')
             height = child.attrib.get('height', '625')
-            items.append((child.tag, child.text, width, height, description))
+            items.append((child.tag, text_data, width, height, description))
 
         fragment = Fragment()
 
@@ -98,7 +105,7 @@ class CarouselBlock(XBlock):
         xml_content = submissions['data']
 
         try:
-            etree.parse(StringIO(xml_content))
+            html.parse(StringIO(xml_content))
             self.data = xml_content
         except etree.XMLSyntaxError as e:
             return {

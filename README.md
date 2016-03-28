@@ -29,8 +29,14 @@ Examples(Updated)
     <link>http://met-content.bu.edu/etr2/content/images/Slide3.JPG</link>
     <description>Slide 3 description comes here</description>
   </img>
-  <video>http://www.youtube.com/watch?v=7uHeNryKUWk</video>
-  <doc>http://www.bu.edu/met-eti/files/2013/03/Final_VirtualLaboratoriesForLearning.pdf</doc>
+  <video>
+    <link>http://www.youtube.com/watch?v=7uHeNryKUWk</link>
+    <description>Video Description goes here</description>
+  </video>
+  <doc>
+    <link>http://www.bu.edu/met-eti/files/2013/03/Final_VirtualLaboratoriesForLearning.pdf</link>
+    <description>Document Description goes here</description>
+  </doc>
 </carousel>
 ```
 
