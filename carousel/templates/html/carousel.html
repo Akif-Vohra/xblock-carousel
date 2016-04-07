@@ -1,28 +1,46 @@
-<div class="seq_other">               
-    <div class="carousel" data-transition="slide" >        		
+{% load i18n %}
+
+<div class="seq_other">
+    <div class="carousel" data-transition="slide" data-prev="{% trans 'prev' %}" data-next="{% trans 'next' %}" data-prev-title="{% trans 'Previous' %}" data-next-title="{% trans 'Next' %}">
         {% for child in items %}
+
         {% if child.0 == "img" %}
             <div>
-                <img src="{{ child.1 }}"  width="{{ child.2 }}" height="{{ child.3 }}">
-                </br>
-                <p> {{child.4|safe}}</p>
+                <div class="slideshow-image">
+                    <img src="{{ child.1 }}"  width="{{ child.2 }}" height="{{ child.3 }}">
+                </div>
+
+                <div class="slideshow-text">
+                    <p>{{child.4|safe}}</p>
+                </div>
             </div>
         {% endif %}
+
         {% if child.0 == "video" %}
             <div>
-                <video id="vid{{ forloop.counter }}" src="" class="video-js vjs-default-skin" controls preload="auto"  width="{{ child.2 }}"  height="{{ child.3 }}" data-setup='{ "techOrder": ["youtube"], "src":   "{{ child.1 }}" }'>
-                </video>
-                </br>
-                <p> {{child.4|safe}}</p>
+                <div class="slideshow-video">
+                    <video id="vid{{ forloop.counter }}" src="" class="video-js vjs-default-skin" controls preload="auto"  width="{{ child.2 }}"  height="{{ child.3 }}" data-setup='{ "techOrder": ["youtube"], "src":   "{{ child.1 }}" }'>
+                    </video>
+                </div>
+
+                <div class="slideshow-text">
+                    <p>{{child.4|safe}}</p>
+                </div>
             </div>
         {% endif %}
+
         {% if child.0 == "doc" %}
             <div>
-                <object data="http://docs.google.com/viewer?url={{ child.1 }}&embedded=true" width="{{ child.2 }}" height="{{ child.3 }}" style="border: none;"></object>
-                </br>
-                <p> {{child.4|safe}}</p>
+                <div class="slideshow-doc">
+                    <object data="http://docs.google.com/viewer?url={{ child.1 }}&embedded=true" width="{{ child.2 }}" height="{{ child.3 }}" style="border: none;"></object>
+                </div>
+
+                <div class="slideshow-text">
+                    <p>{{child.4|safe}}</p>
+                </div>
             </div>
         {% endif %}
+
         {% endfor %}
     </div>
 </div>
