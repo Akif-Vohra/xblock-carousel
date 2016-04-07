@@ -84,11 +84,11 @@
                 return this
             },
             _addNextPrev: function() {
-                var prev = e( this ).attr( prevAttr ) || "MyPrev",
-					next = e( this ).attr( nextAttr ) || "MyNext",
-					prevTitle = e( this ).attr( prevTitleAttr) || "MyPrevious",
-					nextTitle = e( this ).attr( nextTitleAttr) || "MyNext";
-                return e(this).append("<nav class='" + c + "'><a href='#prev' class='prev' aria-hidden='true' title='Previous'>"+prev+"</a><a href='#next' class='next' aria-hidden='true' style='float: right;' title='Next'>"+next+"</a></nav>")[t]("_bindEventListeners")
+                var previous = e(this).attr( prevAttr ) || "MyPrev",
+					next = e(this).attr( nextAttr ) || "MyNext",
+					prevTitle = e(this).attr( prevTitleAttr) || "MyPrevious",
+					nextTitle = e(this).attr( nextTitleAttr) || "MyNext";
+                return e(this).append("<nav class='" + c + "'><a href='#prev' class='prev' aria-hidden='true' title='"+prevTitle+"'>"+previous+"</a><a href='#next' class='next' aria-hidden='true' style='float: right;' title='"+nextTitle+""'>"+next+"</a></nav>")[t]("_bindEventListeners")
             },
             destroy: function() {}
         };
