@@ -88,7 +88,7 @@
 					next = e(this).attr( nextAttr ) || "MyNext",
 					prevTitle = e(this).attr( prevTitleAttr) || "MyPrevious",
 					nextTitle = e(this).attr( nextTitleAttr) || "MyNext";
-                return e(this).append("<nav class='" + c + "'><a href='#prev' class='prev' aria-hidden='true' title='"+prevTitle+"'>"+previous+"</a><a href='#next' class='next' aria-hidden='true' style='float: right;' title='"+nextTitle+""'>"+next+"</a></nav>")[t]("_bindEventListeners")
+                return e(this).append("<nav class='" + c + "'><a href='#prev' class='prev' aria-hidden='true' title='"+prevTitle+"'>"+previous+"</a><a href='#next' class='next' aria-hidden='true' style='float: right;' title='"+nextTitle+"'>"+next+"</a></nav>")[t]("_bindEventListeners")
             },
             destroy: function() {}
         };
