@@ -18,7 +18,7 @@ class CarouselBlock(XBlock):
     """
 
     display_name = String(help="This name appears in horizontal navigation at the top of the page.",
-        default="Lynx Slider Block",
+        default="LYNX Slideshow",
         scope=Scope.content
     )
 
@@ -54,6 +54,32 @@ class CarouselBlock(XBlock):
         """
         Lab view, displayed to the student
         """
+        dummy_data=textwrap.dedent("""
+                     <carousel>
+                      <img>
+                        <link>http://met-content.bu.edu/etr2/content/images/Slide1.JPG</link>
+                        <description>Slide 1 description comes here</description>
+                      </img>
+                      <img>
+                        <link>http://met-content.bu.edu/etr2/content/images/Slide2.JPG</link>
+                        <description>Slide 2 description comes here</description>
+                      </img>
+                      <img>
+                        <link>http://met-content.bu.edu/etr2/content/images/Slide3.JPG</link>
+                        <description>Slide 3 description comes here</description>
+                      </img>
+                      <video>
+                        <link>http://www.youtube.com/watch?v=7uHeNryKUWk</link>
+                        <description>Video Description goes here</description>
+                      </video>
+                      <doc>
+                        <link>http://www.bu.edu/met-eti/files/2013/03/Final_VirtualLaboratoriesForLearning.pdf</link>
+                        <description>Document Description goes here</description>
+                      </doc>
+                    </carousel>
+                  """
+            )
+
         #root = ET.fromstring(self.data)
         #root = etree.parse(StringIO(self.data.replace('&', '&amp;'))).getroot()
         root = etree.fromstring(self.data.replace('&', '&amp;'))
