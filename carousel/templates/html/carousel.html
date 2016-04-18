@@ -4,7 +4,7 @@
     <div class="carousel" data-transition="slide" data-prev="{% trans 'prev' %}" data-next="{% trans 'next' %}" data-prev-title="{% trans 'Previous' %}" data-next-title="{% trans 'Next' %}">
         {% for child in items %}
 
-        {% if child.0 == "img" %}
+        {% if child.0 == "image" %}
             <div>
                 <div class="slideshow-image">
                     <img src="{{ child.1 }}"  width="{{ child.2 }}" height="{{ child.3 }}">
@@ -29,7 +29,7 @@
             </div>
         {% endif %}
 
-        {% if child.0 == "doc" %}
+        {% if child.0 == "document" %}
             <div>
                 <div class="slideshow-doc">
                     <object data="http://docs.google.com/viewer?url={{ child.1 }}&embedded=true" width="{{ child.2 }}" height="{{ child.3 }}" style="border: none;"></object>

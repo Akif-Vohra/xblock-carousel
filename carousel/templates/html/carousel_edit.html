@@ -6,7 +6,7 @@
       <li class="field comp-setting-entry is-set">
           <div class="wrapper-comp-setting">
             <label class="label setting-label" for="edit_display_name">Title</label>
-            <input class="input setting-input edit-display-name" id="edit_display_name" value="{{ self.display_name }}" type="text">
+            <input class="input setting-input edit-display-name" id="edit_display_name" value="{{ display_name }}" type="text">
           </div>
           <span class="tip setting-help">The title of the images carousel that is displayed to the user</span>
       </li>
@@ -18,11 +18,38 @@
                 Example: <link>/asset-v1:XYZ+06+01_2017+type@asset+block@pqrs-somefilename.png</link>
             </span>
             <div class='codemirror-editor-wrapper'>
-              <textarea class="block-xml-editor edit-data">{{ self.data }}</textarea>
+              <!--<textarea class="block-xml-editor edit-data">{{ data }}</textarea>-->
+                <table id="GridView1">
+                    <th>Type</th>
+                    <th>Link</th>
+                    <th>Description</th>
+                    <th>Remove Slide</th>
+
+                    {% for d in items %}
+                        <tr class="block">
+                            <td>
+                                <select name="ddlStatus">
+                                   <option {% if d.0 == "image" %} selected="selected" {% endif %} value="image">image</option>
+                                   <option {% if d.0 == "video" %} selected="selected" {% endif %} value="video">video</option>
+                                   <option {% if d.0 == "document" %} selected="selected" {% endif %} value="document">document</option>
+                                </select>
+                            </td>
+                            <td><input type="text" value="{{d.1}}" ></td>
+                            <td><textarea>{{d.4}}</textarea></td>
+                            <td style="padding:20px; cursor:pointer;" class="remove">X</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                <br>
+
+                <input type="button" value="Add Slide" class="add" style="width:125px !important;">
+
             </div>
           </div>
       </li>
   </ul>
+
   <div class="xblock-actions">
     <span class="xblock-editor-error-message"></span>
     <ul>
@@ -35,4 +62,5 @@
       </li>
     </ul>
   </div>
+
 </div>

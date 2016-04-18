@@ -26,26 +26,26 @@ class CarouselBlock(XBlock):
        scope=Scope.content,
        default=textwrap.dedent("""
              <carousel>
-              <img>
+              <image>
                 <link>http://met-content.bu.edu/etr2/content/images/Slide1.JPG</link>
                 <description>Slide 1 description comes here</description>
-              </img>
-              <img>
+              </image>
+              <image>
                 <link>http://met-content.bu.edu/etr2/content/images/Slide2.JPG</link>
                 <description>Slide 2 description comes here</description>
-              </img>
-              <img>
+              </image>
+              <image>
                 <link>http://met-content.bu.edu/etr2/content/images/Slide3.JPG</link>
                 <description>Slide 3 description comes here</description>
-              </img>
+              </image>
               <video>
                 <link>http://www.youtube.com/watch?v=7uHeNryKUWk</link>
                 <description>Video Description goes here</description>
               </video>
-              <doc>
+              <document>
                 <link>http://www.bu.edu/met-eti/files/2013/03/Final_VirtualLaboratoriesForLearning.pdf</link>
-                <description>Document Description goes here</description>
-              </doc>
+                <description>documentument Description goes here</description>
+              </document>
             </carousel>
           """
     ))
@@ -56,26 +56,26 @@ class CarouselBlock(XBlock):
         """
         dummy_data=textwrap.dedent("""
                      <carousel>
-                      <img>
+                      <image>
                         <link>http://met-content.bu.edu/etr2/content/images/Slide1.JPG</link>
                         <description>Slide 1 description comes here</description>
-                      </img>
-                      <img>
+                      </image>
+                      <image>
                         <link>http://met-content.bu.edu/etr2/content/images/Slide2.JPG</link>
                         <description>Slide 2 description comes here</description>
-                      </img>
-                      <img>
+                      </image>
+                      <image>
                         <link>http://met-content.bu.edu/etr2/content/images/Slide3.JPG</link>
                         <description>Slide 3 description comes here</description>
-                      </img>
+                      </image>
                       <video>
                         <link>http://www.youtube.com/watch?v=7uHeNryKUWk</link>
                         <description>Video Description goes here</description>
                       </video>
-                      <doc>
+                      <document>
                         <link>http://www.bu.edu/met-eti/files/2013/03/Final_VirtualLaboratoriesForLearning.pdf</link>
-                        <description>Document Description goes here</description>
-                      </doc>
+                        <description>documentument Description goes here</description>
+                      </document>
                     </carousel>
                   """
             )
@@ -86,12 +86,14 @@ class CarouselBlock(XBlock):
         items = []
         for child in root:
             text_data = child.find('link').text
-            if child.tag == 'doc': text_data = urllib.quote(text_data, '')
+            if child.tag == 'document': text_data = urllib.quote(text_data, '')
             description = child.find('description')
-            description = ET.tostring(description)
+            description1 = ET.tostring(description)
+            description1 = description1.replace('<description>', '')
+            description1 = description1.replace('</description>', '')
             width = child.attrib.get('width', '100%')
             height = child.attrib.get('height', '625')
-            items.append((child.tag, text_data, width, height, description))
+            items.append((child.tag, text_data, width, height, description1))
 
         fragment = Fragment()
 
@@ -116,9 +118,29 @@ class CarouselBlock(XBlock):
         """
         Studio edit view
         """
+        root = etree.fromstring(self.data.replace('&', '&amp;'))
+        items = []
+        for child in root:
+            text_data = child.find('link').text
+            if child.tag == 'document': text_data = urllib.quote(text_data, '')
+            description = child.find('description')
+            description1 = ET.tostring(description)
+            description1 = description1.replace('<description>', '')
+            description1 = description1.replace('</description>', '')
+            width = child.attrib.get('width', '100%')
+            height = child.attrib.get('height', '625')
+            items.append((child.tag, text_data, width, height, description1))
 
         fragment = Fragment()
-        fragment.add_content(render_template('templates/html/carousel_edit.html', {'self': self, }))
+
+        context = {
+            'data': self.data,
+            'items': items,
+            'display_name': self.display_name
+        }
+
+        fragment = Fragment()
+        fragment.add_content(render_template('templates/html/carousel_edit.html', context))
         fragment.add_javascript(load_resource('public/js/jquery-ui-1.10.4.custom.js'))
         fragment.add_javascript(load_resource('public/js/carousel_edit.js'))
         fragment.initialize_js('CarouselEditBlock')
