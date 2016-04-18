@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <div class="seq_other">
-    <div class="carousel" data-transition="slide" data-prev="{% trans 'prev' %}" data-next="{% trans 'next' %}" data-prev-title="{% trans 'Previous' %}" data-next-title="{% trans 'Next' %}">
+    <div class="carousel" data-transition="slide" data-prev="{% trans 'previous' %}" data-next="{% trans 'next' %}" data-prev-title="{% trans 'Previous' %}" data-next-title="{% trans 'Next' %}">
         {% for child in items %}
 
         {% if child.0 == "image" %}
