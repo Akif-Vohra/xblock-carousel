@@ -1,6 +1,33 @@
 {% load i18n %}
 
 <!-- TODO: Replace by default edit view once available in Studio -->
+
+<style>
+
+.custom_align {
+    border-bottom: 1px solid #ddd;
+}
+
+.custom_align td {
+    vertical-align: top !important;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.custom_align td select{
+    height : auto !important;
+}
+
+.custom_align td input{
+    height : auto !important;
+}
+
+#GridView1 th{
+    font-weight: 600;
+}
+
+</style>
+
 <div class="wrapper-comp-settings is-active editor-with-buttons " id="settings-tab">
   <ul class="list-input settings-list">
       <li class="field comp-setting-entry is-set">
@@ -13,20 +40,20 @@
       <li class="field comp-setting-entry is-set">
           <div class="wrapper-comp-setting">
             <label class="label setting-label" for="edit_data">Definition</label>
-            <span class="tip setting-help">The XML definition for the image carousel</br>
-                Please use Assets URL of image from 'Files & Upload' page. </br>
-                Example: <link>/asset-v1:XYZ+06+01_2017+type@asset+block@pqrs-somefilename.png</link>
-            </span>
+            <!--<span class="tip setting-help">The XML definition for the image carousel</br>-->
+                <!--Please use Assets URL of image from 'Files & Upload' page. </br>-->
+                <!--Example: <link>/asset-v1:XYZ+06+01_2017+type@asset+block@pqrs-somefilename.png</link>-->
+            <!--</span>-->
             <div class='codemirror-editor-wrapper'>
               <!--<textarea class="block-xml-editor edit-data">{{ data }}</textarea>-->
-                <table id="GridView1">
+                <table id="GridView1" style="margin-top:15px;">
                     <th>Type</th>
                     <th>Link</th>
                     <th>Description</th>
                     <th>Remove Slide</th>
 
                     {% for d in items %}
-                        <tr class="block">
+                        <tr class="block custom_align">
                             <td>
                                 <select name="ddlStatus">
                                    <option {% if d.0 == "image" %} selected="selected" {% endif %} value="image">image</option>
@@ -36,7 +63,7 @@
                             </td>
                             <td><input type="text" value="{{d.1}}" ></td>
                             <td><textarea class="edit_me">{{d.4}}</textarea></td>
-                            <td style="padding:20px;"><span style="cursor:pointer;" class="remove">X</span></td>
+                            <td style="padding:20px;"><span style="cursor:pointer;" title="remove slide" class="remove">X</span></td>
                         </tr>
                     {% endfor %}
                 </table>

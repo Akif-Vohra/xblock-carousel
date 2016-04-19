@@ -54,7 +54,7 @@ function CarouselEditBlock(runtime, element) {
     });
 
     $(element).find('.add').bind('click', function(){
-        $('.block:last', element).after("<tr class='block'><td><select name='ddlStatus'><option selected='selected' value='image'>image</option><option value='video'>video</option><option value='document'>document</option></select></td><td><input type='text' value='http://met-content.bu.edu/etr2/content/images/Slide1.JPG'></td><td><textarea class='edit_me'>Some description of image will come here</textarea></td><td style='padding:20px;'><span style='cursor:pointer;' class='remove'>X</span></td></tr>");
+        $('.block:last', element).after("<tr class='block custom_align'><td><select name='ddlStatus'><option selected='selected' value='image'>image</option><option value='video'>video</option><option value='document'>document</option></select></td><td><input type='text' value='http://met-content.bu.edu/etr2/content/images/Slide1.JPG'></td><td><textarea class='edit_me'>Some description of image will come here</textarea></td><td style='padding:20px;'><span style='cursor:pointer;' title='remove slide' class='remove'>X</span></td></tr>");
         tinymce.init({
             selector: '.block:last textarea',
             menubar: false,
