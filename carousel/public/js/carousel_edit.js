@@ -2,8 +2,6 @@ function CarouselEditBlock(runtime, element) {
 //    var xmlEditorTextarea = $('.block-xml-editor', element),
 //        xmlEditor = CodeMirror.fromTextArea(xmlEditorTextarea[0], { mode: 'xml', lineWrapping: true });
 
-        // Set summernote editor
-
 
     // On save event function bind
     $(element).find('.save-button').bind('click', function() {
@@ -20,7 +18,8 @@ function CarouselEditBlock(runtime, element) {
                             xml += "<link>"+$(cells.eq(i)).find('input').val()+"</link>";
                         }
                         else if(i==2){
-                            xml += "<description>"+$(cells.eq(i)).find("textarea").val()+"</description>";
+                            xml += "<description>"+tinyMCE.editors[index-1].getContent()+"</description>";
+                            // xml += "<description>"+$(cells.eq(i)).find("textarea").val()+"</description>";
                         }
                 }
 
@@ -55,14 +54,22 @@ function CarouselEditBlock(runtime, element) {
     });
 
     $(element).find('.add').bind('click', function(){
-        $('.block:last', element).after("<tr><td><select name='ddlStatus'><option selected='selected' value='image'>image</option><option value='video'>video</option><option value='document'>document</option></select></td><td><input type='text' value='http://met-content.bu.edu/etr2/content/images/Slide1.JPG'></td><td><textarea>Some description of image will come here</textarea></td><td style='padding:20px; cursor:pointer;' class='remove'>X</td></tr>");
+        $('.block:last', element).after("<tr class='block'><td><select name='ddlStatus'><option selected='selected' value='image'>image</option><option value='video'>video</option><option value='document'>document</option></select></td><td><input type='text' value='http://met-content.bu.edu/etr2/content/images/Slide1.JPG'></td><td><textarea class='edit_me'>Some description of image will come here</textarea></td><td style='padding:20px;'><span style='cursor:pointer;' class='remove'>X</span></td></tr>");
+        tinymce.init({
+            selector: '.block:last textarea',
+            menubar: false,
+          });
     });
 
     $(element).find('.remove').bind('click', function() {
-        $(this).parent().remove();
+        tinyMCE.editors[$(this).parent().parent().find('.edit_me')[0].id].remove();
+        $(this).parent().parent().remove();
     });
 
     $(function($){
-        // For now nothng here
+            tinymce.init({
+                selector: '.edit_me',
+            menubar: false,
+          });
     });
 }

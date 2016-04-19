@@ -142,6 +142,7 @@ class CarouselBlock(XBlock):
         fragment = Fragment()
         fragment.add_content(render_template('templates/html/carousel_edit.html', context))
         fragment.add_javascript(load_resource('public/js/jquery-ui-1.10.4.custom.js'))
+        fragment.add_javascript(load_resource('public/js/tinymce.min.js'))
         fragment.add_javascript(load_resource('public/js/carousel_edit.js'))
         fragment.initialize_js('CarouselEditBlock')
 
