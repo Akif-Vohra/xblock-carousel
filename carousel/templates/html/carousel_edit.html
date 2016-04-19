@@ -61,9 +61,9 @@
                                    <option {% if d.0 == "document" %} selected="selected" {% endif %} value="document">document</option>
                                 </select>
                             </td>
-                            <td><input type="text" value="{{d.1}}" ></td>
+                            <td><textarea style="width:92%" rows="5">{{d.1}}</textarea></td>
                             <td><textarea class="edit_me">{{d.4}}</textarea></td>
-                            <td style="padding:20px;"><span style="cursor:pointer;" title="remove slide" class="remove">X</span></td>
+                            <td style="padding:20px;"><i style="cursor:pointer; font-size:30px" title="remove slide" class="icon fa fa-times-circle remove"></i></td>
                         </tr>
                     {% endfor %}
                 </table>
