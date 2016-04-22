@@ -129,6 +129,7 @@ class CarouselBlock(XBlock):
             description1 = ET.tostring(description)
             description1 = description1.replace('<description>', '')
             description1 = description1.replace('</description>', '')
+            description1 = description1.replace('&amp;', '&')
             width = child.attrib.get('width', '100%')
             height = child.attrib.get('height', '625')
             items.append((child.tag, text_data, width, height, description1))
