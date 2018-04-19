@@ -50,7 +50,6 @@
                     <th>Type</th>
                     <th>Link</th>
                     <th>Description</th>
-                    <th>FullScreen Link ( Only applicable for Images )</th>
                     <th>Remove Slide</th>
 
                     {% for d in items %}
@@ -62,9 +61,8 @@
                                    <option {% if d.0 == "document" %} selected="selected" {% endif %} value="document">document</option>
                                 </select>
                             </td>
-                            <td><textarea rows="5">{{d.1}}</textarea></td>
+                            <td><textarea style="width:92%" rows="5">{{d.1}}</textarea></td>
                             <td><textarea class="edit_me">{{d.4}}</textarea></td>
-                            <td><textarea rows="5">{{d.5}}</textarea></td> 
                             <td style="padding:20px;"><i style="cursor:pointer; font-size:30px" title="remove slide" class="icon fa fa-times-circle remove"></i></td>
                         </tr>
                     {% endfor %}

@@ -7,13 +7,7 @@
         {% if child.0 == "image" %}
             <div>
                 <div class="slideshow-image">
-                    {% if child.5 %}
-                        <a href="{{ child.5 }}" class="full-screen-link">
-                             <img src="{{ child.1 }}"  width="{{ child.2 }}" height="{{ child.3 }}">
-                         </a>
-                    {% else %}
-                        <img src="{{ child.1 }}"  width="{{ child.2 }}" height="{{ child.3 }}">
-                    {% endif %}
+                    <img src="{{ child.1 }}"  width="{{ child.2 }}" height="{{ child.3 }}">
                 </div>
 
                 <div class="slideshow-text">

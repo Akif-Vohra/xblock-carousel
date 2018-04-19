@@ -10,8 +10,7 @@ from xblock.fragment import Fragment
 from .utils import load_resource, render_template
 
 from StringIO import StringIO
-import HTMLParser
-import urllib2
+
 
 class CarouselBlock(XBlock):
     """
@@ -30,17 +29,14 @@ class CarouselBlock(XBlock):
               <image>
                 <link>http://met-content.bu.edu/etr2/content/images/Slide1.JPG</link>
                 <description>Slide 1 description comes here</description>
-                <full_screen_link>http://met-content.bu.edu/etr2/content/images/Slide1.JPG</full_screen_link>
               </image>
               <image>
                 <link>http://met-content.bu.edu/etr2/content/images/Slide2.JPG</link>
                 <description>Slide 2 description comes here</description>
-                <full_screen_link>http://met-content.bu.edu/etr2/content/images/Slide1.JPG</full_screen_link>
               </image>
               <image>
                 <link>http://met-content.bu.edu/etr2/content/images/Slide3.JPG</link>
                 <description>Slide 3 description comes here</description>
-                <full_screen_link>http://met-content.bu.edu/etr2/content/images/Slide1.JPG</full_screen_link>
               </image>
               <video>
                 <link>http://www.youtube.com/watch?v=7uHeNryKUWk</link>
@@ -92,26 +88,14 @@ class CarouselBlock(XBlock):
         for child in root:
             text_data = child.find('link').text
             if child.tag == 'document': text_data = urllib.quote(text_data, '')
-            
-            try:
-                full_screen_link = child.find("full_screen_link").text
-            except:
-                full_screen_link = ""
-               
             description = child.find('description')
             description1 = ET.tostring(description)
             description1 = description1.replace('<description>', '')
             description1 = description1.replace('</description>', '')
             description1 = description1.replace('&amp;', '&')
-            
-            description1 = urllib2.unquote(HTMLParser.HTMLParser().unescape(description1))
-            
-            full_screen_link = full_screen_link if full_screen_link else ''
-            
             width = child.attrib.get('width', '100%')
             height = child.attrib.get('height', '625')
-
-            items.append((child.tag, text_data, width, height, description1, full_screen_link))
+            items.append((child.tag, text_data, width, height, description1))
 
         fragment = Fragment()
 
@@ -120,10 +104,6 @@ class CarouselBlock(XBlock):
         }
 
         fragment.add_content(render_template('/templates/html/carousel.html', context))
-        
-        fragment.add_javascript_url("https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js")
-        fragment.add_css_url("https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css")
- 
         fragment.add_javascript(load_resource('public/js/jquery-ui-1.10.4.custom.js'))
         fragment.add_css(load_resource('public/css/responsive-carousel.css'))
         fragment.add_css(load_resource('public/css/responsive-carousel.slide.css'))
@@ -132,8 +112,6 @@ class CarouselBlock(XBlock):
         fragment.add_javascript_url("https://vjs.zencdn.net/4.5.1/video.js")
         fragment.add_javascript(load_resource('public/js/youtube.js'))
         fragment.add_javascript('function CarouselBlock(runtime, element) { console.log("success..."); }')
-        fragment.add_javascript(load_resource('public/js/carousel.js'))
-        
         fragment.initialize_js('CarouselBlock')
 
         return fragment
@@ -146,27 +124,15 @@ class CarouselBlock(XBlock):
         items = []
         for child in root:
             text_data = child.find('link').text
-            
             if child.tag == 'document': text_data = urllib.quote(text_data, '')
-            
-            try:
-                full_screen_link = child.find("full_screen_link").text
-            except:
-                full_screen_link = ""  
-            
-            full_screen_link = full_screen_link if full_screen_link else ''
-             
             description = child.find('description')
             description1 = ET.tostring(description)
             description1 = description1.replace('<description>', '')
             description1 = description1.replace('</description>', '')
             description1 = description1.replace('&amp;', '&')
-            
-            description1 = urllib2.unquote(HTMLParser.HTMLParser().unescape(description1))            
-
             width = child.attrib.get('width', '100%')
             height = child.attrib.get('height', '625')
-            items.append((child.tag, text_data, width, height, description1, full_screen_link))
+            items.append((child.tag, text_data, width, height, description1))
 
         fragment = Fragment()
 
@@ -177,16 +143,10 @@ class CarouselBlock(XBlock):
         }
 
         fragment = Fragment()
-        
-        fragment.add_javascript_url("https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js")
-        fragment.add_css_url("https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css")
-       
         fragment.add_content(render_template('templates/html/carousel_edit.html', context))
         fragment.add_javascript(load_resource('public/js/jquery-ui-1.10.4.custom.js'))
         fragment.add_javascript(load_resource('public/js/tinymce.min.js'))
         fragment.add_javascript(load_resource('public/js/carousel_edit.js'))
-        fragment.add_javascript(load_resource('public/js/carousel.js'))
-        
         fragment.initialize_js('CarouselEditBlock')
 
         return fragment

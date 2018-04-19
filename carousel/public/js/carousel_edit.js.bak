@@ -31,7 +31,7 @@ function CarouselEditBlock(runtime, element) {
         });
 
         xml = xml + '</carousel>';
-        
+        console.log(xml);
         
 
         var data = {
